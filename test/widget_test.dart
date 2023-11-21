@@ -5,26 +5,31 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:escribo/controller/homepage_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:escribo/main.dart';
-
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+   WidgetsFlutterBinding.ensureInitialized();
+  group('counter test', () {
+    final controller = HomepageController();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    test('deve somar valores divisiveis por 3 e 5', () {
+      final result = controller.sumAllValuesDivisibleBy3And5('9');
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      expect(result, 14);
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    test('deve somar valores divisiveis por 3 e 5', () {
+      final result = controller.sumAllValuesDivisibleBy3And5('11');
+
+      expect(result, 33);
+    });
+
+    test('deve somar valores divisiveis por 3 e 5', () {
+      final result = controller.sumAllValuesDivisibleBy3And5('10');
+
+      expect(result, 23);
+    });
   });
 }
